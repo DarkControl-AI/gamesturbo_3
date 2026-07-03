@@ -1,0 +1,20 @@
+# gamesturbo_3
+local Players = game:GetService("Players")
+local player = Players.LocalPlayer
+
+-- Bật chế độ tự động đấm võ thuật (Dành cho máy Xiaomi cày đêm)
+_G.AutoMartialArts = true 
+
+task.spawn(function()
+    while _G.AutoMartialArts do
+        task.wait(0.1) -- Delay 0.1 giây để máy Xiaomi không bị quá nhiệt (Lag/Overheat)
+        pcall(function()
+            local character = player.Character
+            if character and character:FindFirstChild("HumanoidRootPart") then
+                -- Lệnh tự động kích hoạt kỹ năng đấm võ thuật bóng tối tại đây
+                game:GetService("VirtualUser"):CaptureController()
+                game:GetService("VirtualUser"):ClickButton1(Vector2.new(851, 1589))
+            end
+        end)
+    end
+end)
